@@ -1,6 +1,8 @@
 # Use Node.js official image
 FROM node:20-slim
 
+RUN apt-get update && apt-get install -y curl
+
 # Set working directory
 WORKDIR /app
 

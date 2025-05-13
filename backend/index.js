@@ -10,12 +10,16 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 5432,
-  });
+  user: "postgres",
+  host: "skdb.cjawyscksd9j.eu-central-1.rds.amazonaws.com",
+  database: "postgres",
+  password: "postgres",
+  port: process.env.DB_PORT || 5432,
+  ssl: {
+    rejectUnauthorized: false
+ }
+});
+
 
 // Add user
 app.post('/api/users', async (req, res) => {
@@ -40,6 +44,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on http://0.0.0.0:${port}`);
 });
+
